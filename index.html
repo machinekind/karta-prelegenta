@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karta prelegenta</title>
+<link rel="stylesheet" href="czcionki/fonts.css">
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+<style>
+:root{--red:#BE3E3E;--ink:#16181a;--muted:#6b6f73;--line:#e3e1dd;--bg:#f6f4f0;--panel:#ffffff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Outfit',system-ui,sans-serif}
+.app{display:grid;grid-template-columns:380px 1fr;min-height:100vh}
+.side{background:var(--panel);border-right:1px solid var(--line);padding:24px 22px 40px;overflow-y:auto;max-height:100vh;position:sticky;top:0}
+.side h1{font-size:24px;font-weight:800;margin:0 0 4px;letter-spacing:-.01em}
+.side p.lead{margin:0 0 18px;color:var(--muted);font-size:14px;line-height:1.45}
+fieldset{border:0;border-top:1px solid var(--line);margin:0;padding:16px 0 6px}
+legend{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);padding:0 8px 0 0}
+label{display:block;font-size:13px;font-weight:600;margin:10px 0 4px}
+label small{font-weight:400;color:var(--muted)}
+input[type=text],textarea{width:100%;font:inherit;font-size:15px;padding:8px 10px;border:1px solid #cfccc6;border-radius:8px;background:#fff;color:var(--ink)}
+textarea{resize:vertical;min-height:44px;line-height:1.3}
+input[type=file]{font-size:13px;width:100%}
+input[type=range]{width:100%}
+.check{display:flex;gap:8px;align-items:center;font-weight:400;font-size:14px}
+.btn{display:block;width:100%;margin-top:18px;padding:14px 16px;font:inherit;font-size:17px;font-weight:800;color:#fff;background:var(--red);border:0;border-radius:10px;cursor:pointer}
+.btn:hover{filter:brightness(1.07)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid #cfccc6;font-weight:600;font-size:14px;padding:10px;margin-top:8px}
+.hint{font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:10px}
+.main{padding:28px;display:flex;flex-direction:column;align-items:center;gap:12px;min-width:0}
+.stage{width:100%;max-width:1400px;aspect-ratio:16/9;position:relative;box-shadow:0 10px 40px rgba(0,0,0,.15);border-radius:4px;overflow:hidden}
+.scaler{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+.status{font-size:13px;color:var(--muted);min-height:18px}
+@media (max-width:900px){.app{grid-template-columns:1fr}.side{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line)}.main{padding:16px}}
+
+/* ---------- KARTA 1920×1080 ---------- */
+#card{width:1920px;height:1080px;position:relative;overflow:hidden;background:#BE3E3E;color:#fff;font-family:'Outfit','Avenir Next','Helvetica Neue',sans-serif;display:flex;flex-direction:column;padding:64px 84px 56px 84px;box-sizing:border-box}
+#card .mono{font-family:'JetBrains Mono',Menlo,monospace}
+#card .rule{border-color:rgba(255,255,255,.75)}
+#card .head{display:flex;align-items:center;justify-content:space-between;flex-shrink:0;padding-bottom:26px;border-bottom:1.5px solid rgba(255,255,255,.75)}
+#card .head .side-l,#card .head .side-r{flex-shrink:0;display:flex;align-items:center;gap:28px}
+#card .big{font-weight:800;font-size:58px;line-height:.95;letter-spacing:-.025em;text-transform:uppercase;white-space:pre-line}
+#card .logo{width:104px;height:104px;display:block;object-fit:contain}
+#card .logo.r{border-radius:8px;object-fit:cover}
+#card .mid{flex-grow:1;display:flex;align-items:center;gap:80px;padding:40px 0;min-height:0}
+#card .photo{width:800px;height:600px;object-fit:cover;border-radius:6px;display:block;flex-shrink:0;outline:1.5px solid rgba(255,255,255,.75);outline-offset:10px}
+#card .col{flex-grow:1;display:flex;flex-direction:column;justify-content:center;min-width:0}
+#card .label{font-weight:700;font-size:22px;letter-spacing:.18em;text-transform:uppercase;opacity:.9}
+#card .name{margin-top:18px;font-weight:800;font-size:92px;line-height:.95;letter-spacing:-.025em;text-transform:uppercase;white-space:pre-line}
+#card .role{margin-top:26px;display:flex;align-items:center;gap:18px}
+#card .role img{width:60px;height:60px;border-radius:6px;display:block;flex-shrink:0;object-fit:cover}
+#card .role div{font-weight:700;font-size:28px;letter-spacing:.08em;text-transform:uppercase;white-space:pre-line}
+#card .sep{margin-top:34px;border-top:1.5px solid rgba(255,255,255,.75)}
+#card .talk{margin-top:28px;font-weight:800;font-size:36px;line-height:1.12;letter-spacing:-.01em;text-transform:uppercase;white-space:pre-line}
+#card .talksub{margin-top:16px;font-weight:500;font-size:22px;letter-spacing:.06em;text-transform:uppercase;opacity:.9;line-height:1.4;white-space:pre-line}
+#card .foot{flex-shrink:0;border-top:1.5px solid rgba(255,255,255,.75);padding-top:24px;display:flex;align-items:center;justify-content:space-between;font-weight:700;text-transform:uppercase}
+#card .when{white-space:nowrap;font-size:56px;letter-spacing:.03em;line-height:1.1}
+#card .dot{opacity:.5;margin:0 14px}
+#card .where{white-space:nowrap;display:flex;align-items:center;gap:14px;font-size:30px;letter-spacing:.08em;margin-top:14px}
+#card .linkbox{white-space:nowrap;font-size:26px;letter-spacing:.08em;padding:14px 20px;border:2.5px solid #fff}
+#card .grain{position:absolute;left:0;top:0;width:1920px;height:1080px;pointer-events:none;opacity:.16;mix-blend-mode:overlay}
+#card .hide{display:none!important}
+</style>
+</head>
+<body>
+<div class="app">
+  <form class="side" id="form" autocomplete="off" onsubmit="return false">
+    <h1>Karta prelegenta</h1>
+    <p class="lead">Wpisz dane, wgraj zdjęcie, kliknij <b>Pobierz PNG</b>. Gotowy obrazek 1920×1080 nadaje się na LinkedIn, Instagram i ekran na sali.</p>
+
+    <fieldset><legend>Prelegent</legend>
+      <label>Imię i nazwisko <small>(Enter = nowa linia)</small></label>
+      <textarea data-k="name" rows="2">Arkadiusz
+Cybulski</textarea>
+      <label>Organizacja / rola <small>(pod nazwiskiem)</small></label>
+      <input type="text" data-k="role" value="Brave Mind Fighters">
+      <label>Napis nad imieniem</label>
+      <input type="text" data-k="label" value="Prelegent">
+      <label>Zdjęcie <small>(najlepiej poziome)</small></label>
+      <input type="file" accept="image/*" data-img="photo">
+      <label>Kadr zdjęcia: góra ↕ dół</label>
+      <input type="range" min="0" max="100" value="40" data-k="photoY">
+    </fieldset>
+
+    <fieldset><legend>Wystąpienie</legend>
+      <label>Tytuł <small>(Enter = nowa linia)</small></label>
+      <textarea data-k="talk" rows="2">Czy polska inżynieria może wygrywać
+w Chinach?</textarea>
+      <label>Podtytuł</label>
+      <textarea data-k="talkSub" rows="2">Kulisy turnieju treningu AI robotów humanoidalnych</textarea>
+    </fieldset>
+
+    <fieldset><legend>Organizacja gościa (prawy górny róg)</legend>
+      <label>Nazwa <small>(Enter = nowa linia)</small></label>
+      <textarea data-k="orgHeader" rows="2">Brave Mind
+Fighters</textarea>
+      <label>Logo <small>(kwadratowe)</small></label>
+      <input type="file" accept="image/*" data-img="orgLogo">
+      <label class="check"><input type="checkbox" data-k="showOrg" checked> Pokaż organizację w nagłówku</label>
+      <label class="check"><input type="checkbox" data-k="showRoleLogo" checked> Pokaż logo przy nazwisku</label>
+    </fieldset>
+
+    <fieldset><legend>Wydarzenie</legend>
+      <label>Nazwa wydarzenia <small>(Enter = nowa linia)</small></label>
+      <textarea data-k="event" rows="2">Machinekind:
+Calibration</textarea>
+      <label>Logo wydarzenia</label>
+      <input type="file" accept="image/*" data-img="eventLogo">
+      <label>Data</label>
+      <input type="text" data-k="date" value="Fri 30.10.2026">
+      <label>Godziny</label>
+      <input type="text" data-k="time" value="18:00 – 21:00">
+      <label>Miejsce</label>
+      <input type="text" data-k="place" value="Politechnika Wrocławska">
+      <label>Sala</label>
+      <input type="text" data-k="room" value="D-20">
+      <label>Link w ramce</label>
+      <input type="text" data-k="link" value="luma.com/ffi08h5f">
+    </fieldset>
+
+    <button type="button" class="btn" id="download">Pobierz PNG</button>
+    <button type="button" class="btn ghost" id="reset">Przywróć przykład</button>
+    <p class="hint">Wszystko dzieje się w Twojej przeglądarce. Zdjęcia nigdzie nie są wysyłane. Teksty zapamiętują się do następnego razu, zdjęcia trzeba wgrać ponownie.</p>
+  </form>
+
+  <main class="main">
+    <div class="stage" id="stage"><div class="scaler" id="scaler">
+      <div id="card">
+        <div class="head">
+          <div class="side-l">
+            <img class="logo" id="eventLogo" src="obrazki/machinekind_logo.png" alt="">
+            <div class="big" id="event"></div>
+          </div>
+          <div class="side-r" id="orgBox">
+            <div class="big" id="orgHeader" style="text-align:right"></div>
+            <img class="logo r" id="orgLogo" src="obrazki/brave_mind_fighters_logo.png" alt="">
+          </div>
+        </div>
+        <div class="mid">
+          <img class="photo" id="photo" src="obrazki/przyklad_zdjecie.jpg" alt="">
+          <div class="col">
+            <div class="label mono" id="label"></div>
+            <div class="name" id="name"></div>
+            <div class="role"><img id="roleLogo" src="obrazki/brave_mind_fighters_logo.png" alt=""><div class="mono" id="role"></div></div>
+            <div class="sep"></div>
+            <div class="talk" id="talk"></div>
+            <div class="talksub mono" id="talkSub"></div>
+          </div>
+        </div>
+        <div class="foot mono">
+          <div>
+            <div class="when"><span id="date"></span><span class="dot">·</span><span id="time"></span></div>
+            <div class="where"><svg width="28" height="35" viewBox="0 0 16 20" fill="none" stroke="#fff" stroke-width="1.6"><path d="M8 19s6-6.2 6-11A6 6 0 0 0 2 8c0 4.8 6 11 6 11z"/><circle cx="8" cy="8" r="2.2"/></svg><span id="place"></span><span class="dot" style="margin:0 12px">·</span><span id="room" style="opacity:.85"></span></div>
+          </div>
+          <div class="linkbox" id="link"></div>
+        </div>
+        <svg class="grain" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+      </div>
+    </div></div>
+    <div class="status" id="status"></div>
+  </main>
+</div>
+
+<script>
+(function(){
+  var STORE='karta-prelegenta-v1';
+  var form=document.getElementById('form');
+  var fields=form.querySelectorAll('[data-k]');
+  var defaults={};
+  fields.forEach(function(el){defaults[el.dataset.k]=el.type==='checkbox'?el.checked:el.value;});
+
+  function get(k){var el=form.querySelector('[data-k="'+k+'"]');return el.type==='checkbox'?el.checked:el.value;}
+  function txt(id,v){document.getElementById(id).textContent=v;}
+
+  function render(){
+    ['name','role','label','talk','talkSub','orgHeader','event','date','time','place','room','link'].forEach(function(k){txt(k,get(k));});
+    document.getElementById('photo').style.objectPosition='center '+get('photoY')+'%';
+    document.getElementById('orgBox').classList.toggle('hide',!get('showOrg'));
+    document.getElementById('roleLogo').classList.toggle('hide',!get('showRoleLogo'));
+    try{var s={};fields.forEach(function(el){s[el.dataset.k]=el.type==='checkbox'?el.checked:el.value;});localStorage.setItem(STORE,JSON.stringify(s));}catch(e){}
+  }
+
+  try{var saved=JSON.parse(localStorage.getItem(STORE)||'null');
+    if(saved)fields.forEach(function(el){if(el.dataset.k in saved){if(el.type==='checkbox')el.checked=saved[el.dataset.k];else el.value=saved[el.dataset.k];}});
+  }catch(e){}
+
+  form.addEventListener('input',render);
+  form.addEventListener('change',render);
+
+  // Wgrywanie obrazków: plik zamieniamy na data URL, więc nic nie wychodzi z komputera.
+  form.querySelectorAll('[data-img]').forEach(function(inp){
+    inp.addEventListener('change',function(){
+      var f=inp.files&&inp.files[0];if(!f)return;
+      var r=new FileReader();
+      r.onload=function(){
+        var ids=inp.dataset.img==='orgLogo'?['orgLogo','roleLogo']:[inp.dataset.img];
+        ids.forEach(function(id){document.getElementById(id).src=r.result;});
+      };
+      r.readAsDataURL(f);
+    });
+  });
+
+  document.getElementById('reset').addEventListener('click',function(){
+    fields.forEach(function(el){if(el.type==='checkbox')el.checked=defaults[el.dataset.k];else el.value=defaults[el.dataset.k];});
+    document.getElementById('photo').src='obrazki/przyklad_zdjecie.jpg';
+    document.getElementById('orgLogo').src=document.getElementById('roleLogo').src='obrazki/brave_mind_fighters_logo.png';
+    document.getElementById('eventLogo').src='obrazki/machinekind_logo.png';
+    form.querySelectorAll('[data-img]').forEach(function(i){i.value='';});
+    render();
+  });
+
+  // Skalowanie podglądu do szerokości okna.
+  var stage=document.getElementById('stage'),scaler=document.getElementById('scaler');
+  function fit(){scaler.style.transform='scale('+(stage.clientWidth/1920)+')';}
+  window.addEventListener('resize',fit);
+
+  function fileName(){
+    var n=get('name').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/ł/g,'l').replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
+    return 'karta_'+(n||'prelegent')+'_1920x1080.png';
+  }
+
+  function exportPng(){
+    var card=document.getElementById('card');
+    return document.fonts.ready.then(function(){
+      return htmlToImage.toPng(card,{width:1920,height:1080,pixelRatio:1,cacheBust:true});
+    });
+  }
+  window.kartaExport=exportPng;
+
+  var status=document.getElementById('status');
+  document.getElementById('download').addEventListener('click',function(){
+    status.textContent='Generuję obrazek…';
+    exportPng().then(function(url){
+      var a=document.createElement('a');a.href=url;a.download=fileName();document.body.appendChild(a);a.click();a.remove();
+      status.textContent='Gotowe: '+fileName();
+    }).catch(function(e){
+      console.error(e);
+      status.textContent='Nie udało się. Otwórz stronę w Chrome i spróbuj jeszcze raz.';
+    });
+  });
+
+  render();fit();
+})();
+</script>
+</body>
+</html>

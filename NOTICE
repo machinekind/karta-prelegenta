@@ -1,0 +1,20 @@
+Karta prelegenta
+Copyright 2026 Machinekind Robotics
+
+Kod (index.html) jest udostępniony na licencji Apache License 2.0, patrz LICENSE.
+
+Wyjątki, które NIE są objęte licencją Apache 2.0:
+
+- obrazki/machinekind_logo.png: znak towarowy Machinekind Robotics.
+- obrazki/brave_mind_fighters_logo.png: logo Brave Mind Fighters, należy do jego właściciela.
+- obrazki/przyklad_zdjecie.jpg i obrazki/przyklad_karta.png: zdjęcie zespołu Brave Mind Fighters,
+  użyte jako przykład promocji wydarzenia Machinekind: Calibration.
+
+Te pliki służą wyłącznie jako przykład. Nie używaj ich w innych projektach,
+tylko podmień na własne.
+
+Czcionki w katalogu czcionki/ są na licencji SIL Open Font License 1.1:
+- Outfit, Copyright 2021 The Outfit Project Authors (czcionki/OFL-Outfit.txt)
+- JetBrains Mono, Copyright 2020 The JetBrains Mono Project Authors (czcionki/OFL-JetBrainsMono.txt)
+
+Biblioteka html-to-image (MIT) jest ładowana z cdn.jsdelivr.net.
